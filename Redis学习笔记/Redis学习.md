@@ -183,7 +183,7 @@ redis> EXEC
 
 比如说，以下字典就展示了一个 `watched_keys` 字典的例子：
 
-### ![](E:\Study-Workplaces\学习笔记\Redis学习笔记\img\watch.PNG)
+### ![](./img/watch.PNG)
 
 
 
@@ -193,7 +193,7 @@ redis> EXEC
 
 举个例子， 如果当前客户端为 `client10086` ， 那么当客户端执行 `WATCH key1 key2` 时， 前面展示的 `watched_keys` 将被修改成这个样子：
 
-![](E:\Study-Workplaces\学习笔记\Redis学习笔记\img\watch2.png)
+![](./img/watch2.png)
 
 通过 `watched_keys` 字典， 如果程序想检查某个键是否被监视， 那么它只要检查字典中是否存在这个键即可； 如果程序要获取监视某个键的所有客户端， 那么只要取出键的值（一个链表）， 然后对链表进行遍历即可。
 
@@ -201,7 +201,7 @@ redis> EXEC
 
 在任何对数据库键空间（key space）进行修改的命令成功执行之后 （比如 [FLUSHDB](http://redis.readthedocs.org/en/latest/server/flushdb.html#flushdb) 、 [SET](http://redis.readthedocs.org/en/latest/string/set.html#set) 、 [DEL](http://redis.readthedocs.org/en/latest/key/del.html#del) 、 [LPUSH](http://redis.readthedocs.org/en/latest/list/lpush.html#lpush) 、 [SADD](http://redis.readthedocs.org/en/latest/set/sadd.html#sadd) 、 [ZREM](http://redis.readthedocs.org/en/latest/sorted_set/zrem.html#zrem) ，诸如此类）， `multi.c/touchWatchedKey` 函数都会被调用 —— 它检查数据库的 `watched_keys` 字典， 看是否有客户端在监视已经被命令修改的键， 如果有的话， 程序将所有监视这个/这些被修改键的客户端的 `REDIS_DIRTY_CAS` 选项打开：
 
-![](E:\Study-Workplaces\学习笔记\Redis学习笔记\img\watch3.png)
+![](./img/watch3.png)
 
 当客户端发送 [EXEC](http://redis.readthedocs.org/en/latest/transaction/exec.html#exec) 命令、触发事务执行时， 服务器会对客户端的状态进行检查：
 
@@ -210,7 +210,7 @@ redis> EXEC
 
 举个例子，假设数据库的 `watched_keys` 字典如下图所示：
 
-![](E:\Study-Workplaces\学习笔记\Redis学习笔记\img\watch4.png)
+![](./img/watch4.png)
 
 如果某个客户端对 `key1` 进行了修改（比如执行 `DEL key1` ）， 那么所有监视 `key1` 的客户端， 包括 `client2` 、 `client5` 和 `client1` 的 `REDIS_DIRTY_CAS` 选项都会被打开， 当客户端 `client2` 、 `client5` 和 `client1` 执行 [EXEC](http://redis.readthedocs.org/en/latest/transaction/exec.html#exec) 的时候， 它们的事务都会以失败告终。
 
