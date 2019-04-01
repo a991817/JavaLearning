@@ -8,7 +8,7 @@
 
 ## 一、分布式系统的三个指标
 
-![](E:\Study-Workplaces\学习笔记\Redis学习笔记\img\cap01.jpg)
+![](./img/cap01.jpg)
 
 1998年，加州大学的计算机科学家 Eric Brewer 提出，分布式系统有三个指标。
 
@@ -26,7 +26,7 @@
 
 大多数分布式系统都分布在多个子网络。每个子网络就叫做一个区（partition）。分区容错的意思是，区间通信可能失败。比如，一台服务器放在中国，另一台服务器放在美国，这就是两个区，它们之间可能无法通信。
 
-![](E:\Study-Workplaces\学习笔记\Redis学习笔记\img\cap02.png)
+![](./img/cap02.png)
 
 上图中，G1 和 G2 是两台跨区的服务器。G1 向 G2 发送一条消息，G2 可能无法收到。系统设计的时候，必须考虑到这种情况。
 
@@ -36,23 +36,23 @@
 
 Consistency 中文叫做"一致性"。意思是，写操作之后的读操作，必须返回该值。举例来说，某条记录是 v0，用户向 G1 发起一个写操作，将其改为 v1。
 
-![](E:\Study-Workplaces\学习笔记\Redis学习笔记\img\cap03.png)
+![](./img/cap03.png)
 
 接下来，用户的读操作就会得到 v1。这就叫一致性。
 
-![](E:\Study-Workplaces\学习笔记\Redis学习笔记\img\cap04.png)
+![](./img/cap04.png)
 
 问题是，用户有可能向 G2 发起读操作，由于 G2 的值没有发生变化，因此返回的是 v0。G1 和 G2 读操作的结果不一致，这就不满足一致性了。
 
-![](E:\Study-Workplaces\学习笔记\Redis学习笔记\img\cap05.png)
+![](./img/cap05.png)
 
 为了让 G2 也能变为 v1，就要在 G1 写操作的时候，让 G1 向 G2 发送一条消息，要求 G2 也改成 v1。
 
-![](E:\Study-Workplaces\学习笔记\Redis学习笔记\img\cap06.png)
+![](./img/cap06.png)
 
 这样的话，用户向 G2 发起读操作，也能得到 v1。
 
-![](E:\Study-Workplaces\学习笔记\Redis学习笔记\img\cap07.jpg)
+![](./img/cap07.jpg)
 
 ## 四、Availability（可用性）
 
@@ -84,7 +84,7 @@ CAP理论的核心是：一个分布式系统不可能同时很好地满足一�
 
 **但一般P必须实现**（所以我们只能在**一致性**和**可用性**之间进行权衡）
 
-![](E:\Study-Workplaces\学习笔记\Redis学习笔记\img\cap08.jpg)
+![](./img/cap08.jpg)
 
 1. **CA** 传统Oracle数据库
 2. **AP** 大多数网站架构的选择（例子：很多人购物的时候，允许小差错，但必须满足可用）

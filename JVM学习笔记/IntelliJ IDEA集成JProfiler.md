@@ -18,12 +18,12 @@ next就可以了，注册码就直接网上找一个就可以了
 
 安装
 
-![](E:\Study-Workplaces\学习笔记\JVM学习笔记\img\jpro2.PNG)
+![](./img/jpro2.PNG)
 
 重启IDEA，点击
 
-![](E:\Study-Workplaces\学习笔记\JVM学习笔记\img\jpro.PNG)
+![](./img/jpro.PNG)
 
 选择目录
 
-![](E:\Study-Workplaces\学习笔记\JVM学习笔记\img\jpro3.PNG)
+![](./img/jpro3.PNG)

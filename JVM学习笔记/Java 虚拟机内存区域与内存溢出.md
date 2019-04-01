@@ -1,6 +1,6 @@
 # Java 虚拟机内存区域与内存溢出
 
-![内存区域](E:\Study-Workplaces\JVM学习笔记\jvmdata.png)
+![内存区域](./img/jvmdata.png)
 
 ## 1、程序计数器
 
@@ -62,7 +62,7 @@
 
 ## 内存溢出的测试方法
 
-![内存溢出的测试方法](E:\Study-Workplaces\JVM学习笔记\overflow.md.png)
+![内存溢出的测试方法](./img/overflow.md.png)
 
 ## 内存泄漏和内存溢出的区别
 
@@ -84,10 +84,10 @@ Object obj = new Object();
 
 通过句柄池访问的方式如下：
 
-![](E:\Study-Workplaces\JVM学习笔记\javastack.png)
+![](./img/javastack.png)
 
 通过直接指针访问的方式如下：
 
-![](E:\Study-Workplaces\JVM学习笔记\javastack1.png)
+![](./img/javastack1.png)
 
 这两种对象的访问方式各有优势，使用句柄访问方式的最大好处就是 reference 中存放的是**稳定的句柄地址**，在对象被移动（垃圾收集时移动对象是非常普遍的行为）时只会改变句柄中的实例数据指针，而 reference 本身不需要修改。使用直接指针访问方式的最大好处是**速度快**，它节省了一次指针定位的时间开销。目前 Java 默认使用的 HotSpot 虚拟机采用的便是是**第二种方式**进行对象访问的。
